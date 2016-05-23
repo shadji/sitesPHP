@@ -1,4 +1,4 @@
-user = "ec2-user"
+user = "deploy"
 
 class Site
 	attr_accessor :name, :directory, :link
