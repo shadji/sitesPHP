@@ -17,10 +17,8 @@ sites = [site1, site2]
 
 ruby_block "Sym link creation" do
 	for site in sites	
-		block do
-			Chef::Log.info("Symlink ln -s #{site.directory} #{site.link}")
-			Chef::Log.info(`cd #{release_path} && ln -s ./#{site.name}/#{site.directory} #{site.link}`)
-			raise "Symlink failed, server wonn't come up" unless $?.success?
-		end
+		Chef::Log.info("Symlink cd #{release_path} && ln -s ./#{site.name}/#{site.directory} #{site.link}")
+		Chef::Log.info(`cd #{release_path} && ln -s ./#{site.name}/#{site.directory} #{site.link}`)
+		raise "Symlink failed, server wonn't come up" unless $?.success?
 	end
 end
