@@ -17,9 +17,8 @@ site2.link = "/mnt/nfs/site2"
 sites = [site1, site2]
 
 for site in sites
-		Chef::Log.info("Symlink #{site1}")
-		Chef::Log.info("Symlink cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}")
-		Chef::Log.info(`sudo -H -u #{user} bash -c 'cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}'`)
-		raise "Symlink failed, server wonn't come up" unless $?.success?
+	Chef::Log.info("Createing symlink: cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}")
+	Chef::Log.info(`sudo -H -u #{user} bash -c 'cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}'`)
+	raise "Symlink failed, server wonn't come up" unless $?.success?
 end
 
