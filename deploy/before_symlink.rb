@@ -20,7 +20,7 @@ sites = [site1, site2]
 
 for site in sites
 	Chef::Log.info("Createing directory, if don't exisits")
-	ruby_block
+	ruby_block "Createing directory" do
 		directory "#{site.link}" do
 		  owner "apache"
 		  group "apache"
