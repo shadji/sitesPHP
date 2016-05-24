@@ -21,8 +21,8 @@ sites = [site1, site2]
 for site in sites
 	Chef::Log.info("Createing directory, if don't exisits")
 	directory site.link do
-	  owner user
-	  group group
+	  owner "apache"
+	  group "apache"
 	  mode '0760'
 	  action :create
 	end
