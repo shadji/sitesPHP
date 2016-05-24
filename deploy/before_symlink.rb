@@ -10,28 +10,24 @@ site1.name = "site1"
 site1.directory = "images"
 site1.link = "/mnt/nfs/site1"
 
-directory site1.link do
-	owner "apache"
-	group "apache"
-	mode '0760'
-	action :create
-end
 
 site2 = Site.new
 site2.name = "site2"
 site2.directory = "images"
 site2.link = "/mnt/nfs/site2"
-directory site2.link do
-	owner "apache"
-	group "apache"
-	mode '0760'
-	action :create
-end
+
 sites = [site1, site2]
 
 for site in sites
 	Chef::Log.info("Createing directory, if don't exisits")
-	
+	ruby_block
+		directory "#{site.link}" do
+		  owner "apache"
+		  group "apache"
+		  mode '0760'
+		  action :create
+		end
+	end
 	Chef::Log.info(`sudo chmod g+s #{site.link}`)
 	Chef::Log.info("Createing symlink: cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}")
 	Chef::Log.info(`sudo -H -u #{user} bash -c 'cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}'`)
