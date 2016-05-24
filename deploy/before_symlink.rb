@@ -1,6 +1,6 @@
 user = "deploy"
 group = "apache"
-mode = "0760"
+mode = "0770"
 
 class Site
 	attr_accessor :name, :directory, :link
