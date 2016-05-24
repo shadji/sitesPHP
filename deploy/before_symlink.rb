@@ -1,4 +1,4 @@
-user = "apache"
+user = "deploy"
 group = "apache"
 mode = "0760"
 
