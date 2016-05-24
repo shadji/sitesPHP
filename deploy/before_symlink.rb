@@ -1,5 +1,6 @@
 user = "apache"
 group = "apache"
+mode = "0760"
 
 class Site
 	attr_accessor :name, :directory, :link
@@ -20,14 +21,9 @@ sites = [site1, site2]
 
 for site in sites
 	Chef::Log.info("Createing directory, if don't exisits")
-	ruby_block "Createing directory" do
-		directory "#{site.link}" do
-		  owner "apache"
-		  group "apache"
-		  mode '0760'
-		  action :create
-		end
-	end
+	Chef::Log.info(`sudo mkdir -p #{site.link}`)
+	Chef::Log.info(`sudo chown #{user}:#{group} #{site.link}`)
+	Chef::Log.info(`sudo chmod #{mode} #{site.link}`)
 	Chef::Log.info(`sudo chmod g+s #{site.link}`)
 	Chef::Log.info("Createing symlink: cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}")
 	Chef::Log.info(`sudo -H -u #{user} bash -c 'cd #{release_path} && ln -s #{site.link} ./#{site.name}/#{site.directory}'`)
