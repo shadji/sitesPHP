@@ -1,7 +1,7 @@
 # User and group for creating 
 user = "deploy"
 group = "apache"
-mode = "0770"
+mode = "0774"
 basepath = node[:nfs_client][:nfs_mount_point]
  
 node[:sites].each do |site|
