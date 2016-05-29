@@ -5,7 +5,7 @@ mode = "0770"
 basepath = node[:nfs_client][:nfs_mount_point]
  
 node[:sites].each do |site|
-	node[:directories].each do |directory, link|
+	site.directories.each do |directory, link|
 		Chef::Log.info("Createing directory, if don't exisits")
 		Chef::Log.info(`sudo mkdir -p #{basepath}/#{link}`)
 		Chef::Log.info(`sudo chown #{user}:#{group} #{basepath}/#{link}`)
